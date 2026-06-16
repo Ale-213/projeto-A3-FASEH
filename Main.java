@@ -2,6 +2,22 @@ import java.util.Scanner;
 
 public class Main {
 
+    public static int lerNumero(Scanner entrada, String mensagem) {
+
+        while (true) {
+
+            try {
+
+                System.out.print(mensagem);
+                return Integer.parseInt(entrada.nextLine());
+
+            } catch (NumberFormatException e) {
+
+                System.out.println("Erro! Digite apenas números.");
+            }
+        }
+    }
+
     public static void main(String[] args) {
 
         Scanner entrada = new Scanner(System.in);
@@ -18,62 +34,45 @@ public class Main {
             System.out.println("4 - Excluir aluno");
             System.out.println("0 - Sair");
 
-            System.out.print("Escolha: ");
-            opcao = entrada.nextInt();
+            opcao = lerNumero(entrada, "Escolha: ");
 
             if (opcao == 1) {
 
-                System.out.print("ID: ");
-                int id = entrada.nextInt();
-
-                entrada.nextLine();
+                int id = lerNumero(entrada, "ID: ");
 
                 System.out.print("Nome: ");
                 String nome = entrada.nextLine();
 
-                System.out.print("Idade: ");
-                int idade = entrada.nextInt();
+                int idade = lerNumero(entrada, "Idade: ");
 
                 Aluno aluno = new Aluno(id, nome, idade);
 
                 service.cadastrar(aluno);
 
                 System.out.println("Aluno cadastrado!");
-            }
 
-            else if (opcao == 2) {
+            } else if (opcao == 2) {
 
                 service.listar();
 
-            }
+            } else if (opcao == 3) {
 
-            else if (opcao == 3) {
-
-                System.out.print("ID do aluno a ser editado: ");
-                int id = entrada.nextInt();
-
-                entrada.nextLine();
+                int id = lerNumero(entrada, "ID do aluno a ser editado: ");
 
                 System.out.print("Novo nome: ");
                 String novoNome = entrada.nextLine();
 
-                System.out.print("Nova idade: ");
-                int novaIdade = entrada.nextInt();
+                int novaIdade = lerNumero(entrada, "Nova idade: ");
 
                 service.editar(id, novoNome, novaIdade);
 
-            }
+            } else if (opcao == 4) {
 
-            else if (opcao == 4) {
-
-                System.out.print("ID do aluno a ser removido: ");
-                int id = entrada.nextInt();
+                int id = lerNumero(entrada, "ID do aluno a ser removido: ");
 
                 service.excluir(id);
 
-            }
-
-            else if (opcao != 0) {
+            } else if (opcao != 0) {
 
                 System.out.println("Opção inválida!");
 
